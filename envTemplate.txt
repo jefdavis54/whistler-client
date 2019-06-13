@@ -1,2 +1,1 @@
-ADMIN_EMAIL_LCASE=admin@gmail.com
-GRAPHQL_URL=http://localhost:4444
+# CURRENTLY UNUSED

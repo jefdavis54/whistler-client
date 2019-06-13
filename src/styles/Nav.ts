@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const StyledNav = styled.ul`
   margin: 0;
@@ -6,6 +6,10 @@ const StyledNav = styled.ul`
   display: flex;
   justify-self: end;
   font-size: 2rem;
+  p {
+    align-self: center;
+    padding: 1rem 3rem;
+  }
   a,
   button {
     padding: 1rem 3rem;
@@ -25,7 +29,7 @@ const StyledNav = styled.ul`
       padding: 0 10px;
     }
     &:before {
-      content: '';
+      content: "";
       width: 2px;
       background: ${props => props.theme.color.border_main};
       height: 100%;
@@ -38,7 +42,7 @@ const StyledNav = styled.ul`
     &:after {
       height: 2px;
       background: ${props => props.theme.color.bg_logo};
-      content: '';
+      content: "";
       width: 0;
       position: absolute;
       transform: translateX(-50%);

@@ -236,6 +236,12 @@ interface Error {
   message: string;
 }
 
+interface DefaultApolloClientState {
+  token: string | undefined;
+  name: string | undefined;
+  email: string | undefined;
+}
+
 export {
   Artwork,
   ArtworkLocation,
@@ -247,4 +253,5 @@ export {
   Comment,
   AuctionArtwork,
   AuctionArtworkBid,
+  DefaultApolloClientState,
 };

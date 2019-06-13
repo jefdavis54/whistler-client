@@ -8,9 +8,8 @@
     "type": "git"
   },
   "scripts": {
-    "start": "next ./src start",
+    "start": "next ./src",
     "dev": "next ./src",
-    "export": "next ./src export",
     "init": "tsc --init"
   },
   "dependencies": {

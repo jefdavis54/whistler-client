@@ -3,9 +3,8 @@ import { Mutation } from "react-apollo";
 import StyledForm from "../styles/Form";
 import LOGIN_USER_MUTATION from "../graphql/Mutation/loginUser";
 import ErrorMessage from "./ErrorMessage";
-import Router from "next/router";
 import flattenGrapghql from "../util/flattenGraphql";
-import setLoginState from "../util/setLoginState";
+import login from "../util/login";
 
 const initialFormData = {
   email: "",
@@ -31,11 +30,8 @@ const SignIn = () => {
               // zJED TODO: Check response.errors in addition to the flatten below
               const { errors, data, token } = flattenGrapghql(response, "loginUser");
               if (errors.length === 0) {
-                setLoginState(data, token);
                 setFormData(initialFormData);
-                Router.push({
-                  pathname: `/artists`,
-                });
+                login(data, token, "/");
               } else {
                 console.log("ERROR:SignIn:: errors", errors);
               }

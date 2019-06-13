@@ -1,5 +1,3 @@
-export default () => (
-  <div>
-    <p>Signin -> signin.tsx</p>
-  </div>
-)
+import SignIn from "../components/SignIn";
+
+export default () => <SignIn />;

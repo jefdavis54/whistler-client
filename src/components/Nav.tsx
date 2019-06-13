@@ -1,8 +1,10 @@
-import Link from 'next/link'
-import StyledNav from '../styles/Nav'
+import Link from "next/link";
+import StyledNav from "../styles/Nav";
+import logout from "../util/logout";
 
-const Nav = () => (
+const LoggedIn = ({ name }: any) => (
   <StyledNav>
+    {name && <p>{`Hello, ${name}`}</p>}
     <Link href="/items">
       <a>Gallery</a>
     </Link>
@@ -21,10 +23,44 @@ const Nav = () => (
     <Link href="/addlocation">
       <a>Add</a>
     </Link>
-    <Link href="/signup">
-      <a>Signup / in</a>
+    <Link href="/account">
+      <a>Account</a>
+    </Link>
+    <button type="button" onClick={logout}>
+      Signout
+    </button>
+    <Link href="/about">
+      <a>About</a>
     </Link>
   </StyledNav>
-)
+);
+const LoggedOut = () => (
+  <StyledNav>
+    <Link href="/signup">
+      <a>Signup</a>
+    </Link>
+    <Link href="/signin">
+      <a>Signin</a>
+    </Link>
+    <Link href="/about">
+      <a>About</a>
+    </Link>
+  </StyledNav>
+);
 
-export default Nav
+const Nav = () => {
+  if (typeof window !== "undefined") {
+    const token = localStorage.getItem("token");
+    const name = localStorage.getItem("name");
+    if (typeof token === "string" && token.length > 0) {
+      if (typeof name === "string" && name.length > 0) {
+        return <LoggedIn name={name} />;
+      }
+      return <LoggedIn />;
+    }
+    return <LoggedOut />;
+  }
+  return {};
+};
+
+export default Nav;

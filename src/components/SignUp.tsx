@@ -3,9 +3,8 @@ import { Mutation } from "react-apollo";
 import StyledForm from "../styles/Form";
 import CREATE_USER_MUTATION from "../graphql/Mutation/createUser";
 import ErrorMessage from "./ErrorMessage";
-import Router from "next/router";
 import flattenGrapghql from "../util/flattenGraphql";
-import setLoginState from "../util/setLoginState";
+import login from "../util/login";
 
 const initialFormData = {
   name: "",
@@ -33,11 +32,8 @@ const SignUp = () => {
               // zJED TODO: Check response.errors in addition to the flatten below
               const { errors, data, token } = flattenGrapghql(response, "createUser");
               if (errors.length === 0) {
-                setLoginState(data, token);
                 setFormData(initialFormData);
-                Router.push({
-                  pathname: `/gallery`,
-                });
+                login(data, token, "/");
               } else {
                 console.log("ERROR:SignUp:: errors", errors);
               }
