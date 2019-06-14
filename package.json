@@ -8,9 +8,11 @@
     "type": "git"
   },
   "scripts": {
-    "start": "next ./src",
-    "dev": "next ./src",
-    "init": "tsc --init"
+    "dev": "next",
+    "build": "next build",
+    "start": "next start -p $PORT",
+    "export": "npm run build && next export",
+    "tsc-init": "tsc --init"
   },
   "dependencies": {
     "apollo-boost": "0.3.1",

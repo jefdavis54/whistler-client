@@ -60,7 +60,7 @@ const Nav = () => {
     }
     return <LoggedOut />;
   }
-  return {};
+  return <div />;
 };
 
 export default Nav;

@@ -11,7 +11,8 @@ export default withApollo(
       credentials: "same-origin",
       cache: new InMemoryCache().restore(initialState),
       request: async operation => {
-        const token = await localStorage.getItem("token");
+        const token =
+          typeof window !== "undefined" ? await localStorage.getItem("token") : undefined;
         operation.setContext({
           headers: {
             authorization: token ? `Bearer ${token}` : "",
