@@ -1,6 +1,6 @@
-import Header from './Header'
-import Meta from './Meta'
-import StyledPage from '../styles/Page'
+import Header from "./Header";
+import Meta from "./Meta";
+import StyledPage from "../styles/Page";
 
 const Page = ({ children }: any) => (
   <StyledPage>
@@ -8,6 +8,6 @@ const Page = ({ children }: any) => (
     <Header />
     {children}
   </StyledPage>
-)
+);
 
-export default Page
+export default Page;

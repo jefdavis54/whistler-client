@@ -6,6 +6,8 @@ const LOGIN_USER_MUTATION = gql`
       errors
       token
       data {
+        id
+        easyId
         email
         name
       }

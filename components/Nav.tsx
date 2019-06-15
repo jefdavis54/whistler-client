@@ -2,14 +2,14 @@ import Link from "next/link";
 import StyledNav from "../styles/Nav";
 import logout from "../util/logout";
 
-const LoggedIn = ({ name }: any) => (
+const LoggedIn = ({ name, id }: any) => (
   <StyledNav>
     {name && <p>{`Hello, ${name}`}</p>}
-    <Link href="/items">
+    <Link href="/gallery">
       <a>Gallery</a>
     </Link>
-    <Link href="/artworks">
-      <a>Artworks</a>
+    <Link href="/auctions">
+      <a>Auctions</a>
     </Link>
     <Link href="/artists">
       <a>Artists</a>
@@ -23,7 +23,7 @@ const LoggedIn = ({ name }: any) => (
     <Link href="/addlocation">
       <a>Add</a>
     </Link>
-    <Link href="/account">
+    <Link href="/accounts?id={id}">
       <a>Account</a>
     </Link>
     <button type="button" onClick={logout}>
@@ -58,9 +58,8 @@ const Nav = () => {
       }
       return <LoggedIn />;
     }
-    return <LoggedOut />;
   }
-  return <div />;
+  return <LoggedOut />;
 };
 
 export default Nav;

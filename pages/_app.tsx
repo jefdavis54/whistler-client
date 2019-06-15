@@ -11,7 +11,7 @@ interface WithApolloProps {
 }
 
 class MyApp extends App<React.ComponentClass & WithApolloProps> {
-  // zJED TODO - Check if this is still needed... This exposes the query to the user
+  // zJED TODO - This exposes the query to the user. Should I use 'https://github.com/zeit/next-codemod#url-to-withrouter' instead?
   static async getInitialProps({ Component, ctx }: any) {
     let pageProps: any = {};
     if (Component.getInitialProps) {

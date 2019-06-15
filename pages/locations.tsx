@@ -1,5 +1,9 @@
-import Locations from '../components/Locations'
+import Location from "../components/Location";
+import Locations from "../components/Locations";
 
-const LocationsPage = () => <Locations />
-
-export default LocationsPage
+export default (props: any) => {
+  if (props.query && typeof props.query.id === "string" && props.query.id.length > 0) {
+    return <Location {...props} />;
+  }
+  return <Locations {...props} />;
+};

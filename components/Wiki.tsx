@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Mutation } from "react-apollo";
 import StyledForm from "../styles/Form";
 import GET_WIKI_MUTATION from "../graphql/Mutation/getWikiLocation";
-import ErrorMessage from "./ErrorMessage";
+import ErrorMessageNetwork from "./ErrorMessageNetwork";
 
 const AddLocation = () => {
   const [wikiPage, setWikiPage] = useState("");
@@ -26,7 +26,7 @@ const AddLocation = () => {
         >
           <fieldset disabled={loading} aria-busy={loading}>
             <h2>Load from wiki page</h2>
-            <ErrorMessage error={error} />
+            <ErrorMessageNetwork error={error} />
             <label htmlFor="wiki">
               Wiki link
               <input

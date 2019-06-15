@@ -1,28 +1,20 @@
 import StyledError from "../styles/ErrorMessage";
-import { Error } from "../lib/typsescriptInterfaces";
 
-const DisplayError = ({ error }: any) => {
-  if (!error || !error.message) return null;
-  if (
-    error.networkError &&
-    error.networkError.result &&
-    error.networkError.result.errors.length
-  ) {
-    return error.networkError.result.errors.map((error: Error, i: number) => (
-      <StyledError key={i}>
-        <p data-test="graphql-error">
-          <strong>Error:</strong>
-          {error.message.replace("GraphQL error: ", "")}
-        </p>
-      </StyledError>
-    ));
-  }
+type Props = {
+  title: string;
+  errorMsgArr: string[];
+};
+
+const DisplayError = ({ title = "", errorMsgArr }: Props) => {
+  if (errorMsgArr.length === 0) return null;
   return (
     <StyledError>
-      <p data-test="graphql-error">
-        <strong>Error:</strong>
-        {error.message.replace("GraphQL error: ", "")}
+      <p>
+        {title.length > 0 ? title + " " : ""}Error{errorMsgArr.length > 1 ? "s" : ""}:
       </p>
+      {errorMsgArr.map((msg: string, i: number) => (
+        <li key={i}>{msg}</li>
+      ))}
     </StyledError>
   );
 };

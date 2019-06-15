@@ -5,7 +5,8 @@ import ALL_ARTWORKS_QUERY from "../graphql/Query/artworks";
 import { Artwork } from "../lib/typsescriptInterfaces";
 import Card from "./ArtworkCard";
 
-const Artworks = () => (
+// zJED TODO: Currently auctions just displays all artworks.
+const Auctions = () => (
   <StyledCenter>
     <p>All Artworks</p>
     <Query query={ALL_ARTWORKS_QUERY}>
@@ -27,4 +28,4 @@ const Artworks = () => (
   </StyledCenter>
 );
 
-export default Artworks;
+export default Auctions;

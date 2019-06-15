@@ -1,18 +1,21 @@
 import styled from "styled-components";
 
-const StyledNav = styled.ul`
+const StyledNav = styled.div`
   margin: 0;
   padding: 0;
   display: flex;
   justify-self: end;
   font-size: 2rem;
+  a,
+  p,
+  button {
+    padding: 1rem 2rem;
+  }
   p {
     align-self: center;
-    padding: 1rem 3rem;
   }
   a,
   button {
-    padding: 1rem 3rem;
     display: flex;
     align-items: center;
     position: relative;

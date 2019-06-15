@@ -4,7 +4,7 @@ import StyledForm from "../styles/Form";
 import CREATE_LOCATION_MUTATION from "../graphql/Mutation/createLocation";
 import GET_WIKI_MUTATION from "../graphql/Mutation/getWikiLocation";
 import { ArtworkLocation } from "../lib/typsescriptInterfaces";
-import ErrorMessage from "./ErrorMessage";
+import ErrorMessageNetwork from "./ErrorMessageNetwork";
 import flattenGrapghql from "../util/flattenGraphql";
 
 const initialLocation: ArtworkLocation = {
@@ -88,7 +88,7 @@ const AddLocation = () => {
           >
             <fieldset disabled={loading} aria-busy={loading}>
               <h2>Load from wiki page</h2>
-              <ErrorMessage error={error} />
+              <ErrorMessageNetwork error={error} />
               <label htmlFor="wiki">
                 Wiki link
                 <input
@@ -121,7 +121,7 @@ const AddLocation = () => {
               }}
             >
               <h2>Add a Location:</h2>
-              <ErrorMessage error={error} />
+              <ErrorMessageNetwork error={error} />
               <fieldset disabled={loading || wikiLoading} aria-busy={loading || wikiLoading}>
                 <label htmlFor="easyId">
                   EasyId

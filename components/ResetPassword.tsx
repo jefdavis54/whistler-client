@@ -1,23 +1,39 @@
 import { useState } from "react";
 import { Mutation } from "react-apollo";
 import StyledForm from "../styles/Form";
-import CREATE_USER_MUTATION from "../graphql/Mutation/createUser";
+import RESET_PASSWORD_MUTATION from "../graphql/Mutation/resetPassword";
 import ErrorMessage from "./ErrorMessage";
 import ErrorMessageNetwork from "./ErrorMessageNetwork";
 import flattenGrapghql from "../util/flattenGraphql";
 import login from "../util/login";
+import isEmail from "isemail";
 import validatePassword from "../shared/validatePassword";
 
-const SignUp = () => {
+const ResetPassword = (props: any) => {
   const initialFormData = {
-    name: "",
     email: "",
+    resetToken: "",
     password: "",
     password2: "",
   };
-  const initalFormErrors: string[] = [];
+  const initialFormErrors: string[] = [];
+  const valid =
+    props.query &&
+    typeof props.query.resetToken === "string" &&
+    typeof props.query.email === "string" &&
+    props.query.resetToken.trim().length > 0 &&
+    props.query.email.trim().length > 0 &&
+    isEmail.validate(props.query.email.trim());
+  if (valid) {
+    initialFormData.email = props.query.email;
+    initialFormData.resetToken = props.query.resetToken;
+  } else {
+    initialFormErrors.push(
+      "Invalid reset password web address provided. Please use the link from the reset token email.",
+    );
+  }
   const [formData, setFormData] = useState(initialFormData);
-  const [formErrors, setFormErrors] = useState(initalFormErrors);
+  const [formErrors, setFormErrors] = useState(initialFormErrors);
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -25,8 +41,8 @@ const SignUp = () => {
   };
 
   return (
-    <Mutation mutation={CREATE_USER_MUTATION} variables={formData}>
-      {(createUser: any, { loading, error }: any) => {
+    <Mutation mutation={RESET_PASSWORD_MUTATION} variables={formData}>
+      {(resetPassword: any, { loading, error }: any) => {
         return (
           <StyledForm
             method="post"
@@ -39,10 +55,8 @@ const SignUp = () => {
               if (signUpErrors.length > 0) {
                 setFormErrors(signUpErrors);
                 return;
-              } else {
-                setFormErrors(initalFormErrors);
               }
-              const response = await createUser(formData);
+              const response = await resetPassword(formData);
               // zJED TODO: Check response.errors in addition to the flatten below
               const { errors, data, token } = flattenGrapghql(response, "createUser");
               if (errors.length === 0) {
@@ -53,34 +67,10 @@ const SignUp = () => {
               }
             }}
           >
-            <h2>Sign up for an account:</h2>
-            <ErrorMessage errorMsgArr={formErrors} title={"Signup"} />
+            <h2>Reset password:</h2>
+            <ErrorMessage errorMsgArr={formErrors} title={"Reset Password"} />
             <ErrorMessageNetwork error={error} />
-            <fieldset disabled={loading} aria-busy={loading}>
-              <label htmlFor="name">
-                Name (How you would like to be known to by users of this website.)
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  placeholder="Enter your first name, full name, handle, email, etc..."
-                  required
-                  value={formData.name}
-                  onChange={handleChange}
-                />
-              </label>
-              <label htmlFor="email">
-                Email
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  placeholder="Enter email..."
-                  required
-                  value={formData.email}
-                  onChange={handleChange}
-                />
-              </label>
+            <fieldset disabled={loading || !valid} aria-busy={loading}>
               <label htmlFor="password">
                 Password (At least 8 characters with upper and lowercase letters)
                 <input
@@ -115,4 +105,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default ResetPassword;

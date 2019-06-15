@@ -8,10 +8,12 @@ module.exports = {
       jsx: true,
     },
   },
-  plugins: ["@typescript-eslint", "prettier"],
+  plugins: ["@typescript-eslint", "prettier", "react-hooks"],
   rules: {
     "@typescript-eslint/rule-name": "error",
     "prettier/prettier": "error",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
   },
   settings: {
     react: {

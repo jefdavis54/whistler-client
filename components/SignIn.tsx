@@ -2,17 +2,17 @@ import { useState } from "react";
 import { Mutation } from "react-apollo";
 import StyledForm from "../styles/Form";
 import LOGIN_USER_MUTATION from "../graphql/Mutation/loginUser";
-import ErrorMessage from "./ErrorMessage";
+import ErrorMessageNetwork from "./ErrorMessageNetwork";
 import flattenGrapghql from "../util/flattenGraphql";
 import login from "../util/login";
 
-const initialFormData = {
-  email: "",
-  password: "",
-};
-
 const SignIn = () => {
+  const initialFormData = {
+    email: "",
+    password: "",
+  };
   const [formData, setFormData] = useState(initialFormData);
+
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -38,7 +38,7 @@ const SignIn = () => {
             }}
           >
             <h2>Sign in to account:</h2>
-            <ErrorMessage error={error} />
+            <ErrorMessageNetwork error={error} />
             <fieldset disabled={loading} aria-busy={loading}>
               <label htmlFor="email">
                 Email
@@ -64,8 +64,8 @@ const SignIn = () => {
                   onChange={handleChange}
                 />
               </label>
-
               <button type="submit">Submit</button>
+              <button type="button">Reset Password</button>
             </fieldset>
           </StyledForm>
         );
