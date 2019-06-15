@@ -11,6 +11,12 @@ const SignIn = () => {
     email: "",
     password: "",
   };
+  if (typeof localStorage !== "undefined") {
+    const existingEmail = localStorage.getItem("email");
+    if (existingEmail) {
+      initialFormData.email = existingEmail;
+    }
+  }
   const [formData, setFormData] = useState(initialFormData);
 
   const handleChange = (e: any) => {
